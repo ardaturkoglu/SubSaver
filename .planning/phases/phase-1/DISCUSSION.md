@@ -1,7 +1,7 @@
 # Phase 1 Discussion: Foundation + UI Design System
 
 ## Phase Scope Recap
-Phase 1 establishes the **data layer** (Room entities, DAO, Repository), **Material 3 theme**, **navigation shell**, and the **Application class**. But before we write code, we need to lock down the visual design so every subsequent phase builds on a consistent foundation.
+Phase 1 establishes the **data layer** (Room entities, DAO, Repository), **Material 3 theme**, **navigation shell**, **Supabase project baseline**, and the **Application class**. But before we write code, we need to lock down the visual design so every subsequent phase builds on a consistent foundation.
 
 ---
 
@@ -349,6 +349,11 @@ Same layout as light mode but fully dark-themed.
 - [ ] `SubSaverApp.kt` (Application class)
 - [ ] Update `MainActivity.kt` with NavHost
 - [ ] Update `AndroidManifest.xml` with Application class
+
+### Wave 6: Supabase Baseline (can run in parallel with Waves 4-5)
+- [ ] Verify Supabase project health via MCP
+- [ ] Create initial `subscriptions` table migration (sync-ready fields)
+- [ ] Document Supabase environment usage in `.planning/PROJECT.md`
 
 ### Verification
 - App compiles and runs

@@ -19,6 +19,7 @@ Budget-conscious Android users (18-45) who subscribe to multiple streaming, SaaS
 | UI | Jetpack Compose, Material 3, Material Icons Extended |
 | Architecture | MVVM + StateFlow (single-module, feature-based packages) |
 | Local DB | Room (SQLite) |
+| Cloud Backend | Supabase Postgres (project provisioned; used for backend ops and sync-ready schema) |
 | DI | Manual (object-level singletons — no Hilt/Koin for MVP speed) |
 | Navigation | Compose Navigation (single NavHost) |
 | Notifications | AlarmManager + BroadcastReceiver (local only) |
@@ -34,6 +35,7 @@ Budget-conscious Android users (18-45) who subscribe to multiple streaming, SaaS
 3. **No over-engineering** — no UseCases layer, no Repository interfaces (concrete only), no dependency injection framework
 4. **StateFlow everywhere** — no LiveData, no RxJava
 5. **Room as single source of truth** — observe via Flow, expose via StateFlow in ViewModels
+6. **Local-first with sync-ready backend** — app works fully offline, Supabase integration is added incrementally without blocking MVP
 
 ## Package Structure
 ```
@@ -82,10 +84,18 @@ com.ardat.comsubsaverapp/
 
 ## Constraints
 - Must ship to Google Play within 24 hours of starting execution
-- No backend / no auth / no cloud sync in MVP
-- All data is local-only (Room)
+- No auth flow in MVP (single-device usage first)
+- App must remain fully usable offline (Room-first)
 - No onboarding flow in MVP — straight to dashboard
 - Notification permission must be requested at runtime (Android 13+)
+
+## Supabase Project Context
+- Organization: `ardaturkogluu's Org` (`niolszgotbdlgikaqyru`)
+- Project name: `SubSaver`
+- Project ID / ref: `ebiymaspbliujgfnubkm`
+- Region: `ap-northeast-1`
+- API URL: `https://ebiymaspbliujgfnubkm.supabase.co`
+- Current DB status: healthy, no tables yet, no migrations yet
 
 ## Success Metrics (MVP)
 - App installs > 100 in first week (organic + ASO)

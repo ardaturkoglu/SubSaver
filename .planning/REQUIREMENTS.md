@@ -45,6 +45,15 @@
 | FR-41 | Rate app link | P2 | Opens Play Store listing |
 | FR-42 | Notification toggle (enable/disable all) | P1 | Master toggle cancels or re-schedules all alarms |
 
+### Supabase (Backend Ops + Sync Readiness)
+| ID | Requirement | Priority | Acceptance Criteria |
+|---|---|---|---|
+| FR-50 | Supabase project is linked in project docs/config | P0 | Project ID, URL, region, and usage rules are documented and verified via MCP |
+| FR-51 | Create `subscriptions` table schema in Supabase | P1 | Table exists with core fields matching Room entity and timestamp columns |
+| FR-52 | Keep app local-first while Supabase is introduced | P0 | Core CRUD and dashboard work with no network connectivity |
+| FR-53 | Add sync metadata fields for future cloud sync | P1 | Local model + remote schema include `updated_at` and `sync_state`-ready support |
+| FR-54 | Secrets are never committed to git | P0 | Supabase keys are stored via local config, and git history stays clean |
+
 ## Non-Functional Requirements
 
 | ID | Requirement | Priority | Acceptance Criteria |
@@ -58,6 +67,7 @@
 | NFR-07 | Firebase Analytics event logging | P1 | Log: app_open, sub_added, sub_deleted, sub_edited |
 | NFR-08 | Accessibility (content descriptions) | P1 | All interactive elements have contentDescription |
 | NFR-09 | Dark mode support | P1 | Follows system theme via Material 3 |
+| NFR-10 | Supabase schema changes use tracked migrations | P1 | All DDL for Supabase is applied through migration files/commands, not ad hoc |
 
 ## Play Store / ASO Requirements
 

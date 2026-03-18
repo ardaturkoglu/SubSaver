@@ -4,8 +4,8 @@
 
 ---
 
-### Phase 1: Foundation — Data Layer + Theme + Navigation Shell
-**Goal**: Establish Room database, entities, DAO, repository, Material 3 theme, and navigation skeleton.
+### Phase 1: Foundation — Data Layer + Theme + Navigation Shell + Supabase Baseline
+**Goal**: Establish Room database, entities, DAO, repository, Material 3 theme, navigation skeleton, and Supabase project baseline.
 **Estimated effort**: 2-3 hours
 
 | Task | Requirement IDs | Deliverable |
@@ -14,11 +14,13 @@
 | Create `SubscriptionDao` with CRUD + Flow queries | FR-01, FR-10, FR-11, FR-12 | `data/db/SubscriptionDao.kt` |
 | Create `SubSaverDatabase` (Room) | FR-01 | `data/db/SubSaverDatabase.kt` |
 | Create `SubscriptionRepository` (concrete) | FR-01, FR-02 | `data/repository/SubscriptionRepository.kt` |
+| Verify Supabase project connection via MCP and document it | FR-50 | `.planning/PROJECT.md` |
+| Create initial Supabase `subscriptions` schema migration | FR-51, FR-53, NFR-10 | Supabase migration |
 | Configure Material 3 theme (colors, typography, dynamic color) | NFR-04, NFR-05, NFR-09 | `ui/theme/` |
 | Set up Compose Navigation with Screen sealed class | FR-01, FR-10, FR-11 | `navigation/` |
 | Create `SubSaverApp` Application class | NFR-01 | `SubSaverApp.kt` |
 
-**Exit criteria**: App compiles, navigates between empty Dashboard and Add screens, Room DB created on first launch.
+**Exit criteria**: App compiles, navigates between empty Dashboard and Add screens, Room DB created on first launch, Supabase project baseline is verified and documented.
 
 ---
 
@@ -146,12 +148,12 @@
 
 | Phase | Name | Hours | Requirements Covered |
 |---|---|---|---|
-| 1 | Foundation | 2-3h | FR-01,10,11,12,13,14 / NFR-01,04,05,09 |
+| 1 | Foundation + Supabase Baseline | 2-3h | FR-01,10,11,12,13,14,50,51,53 / NFR-01,04,05,09,10 |
 | 2 | Dashboard | 2-3h | FR-01,02,03,04,05,12 |
 | 3 | Add/Edit | 1.5-2h | FR-10,11,13,14,15,16 |
 | 4 | Notifications | 1.5-2h | FR-20,21,22,23 |
 | 5 | AdMob | 1-1.5h | FR-30,31,32 |
 | 6 | Firebase | 0.75-1h | NFR-02,07 |
-| 7 | Settings + Polish | 1-1.5h | FR-40,41,42 / NFR-01,05,06,08,09 |
+| 7 | Settings + Polish | 1-1.5h | FR-40,41,42,52,54 / NFR-01,05,06,08,09 |
 | 8 | ASO + Publish | 2-3h | ASO-01 through ASO-09 |
 | **Total** | | **~13-17h** | **All requirements** |
