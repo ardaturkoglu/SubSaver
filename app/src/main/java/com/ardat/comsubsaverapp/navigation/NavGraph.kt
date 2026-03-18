@@ -16,6 +16,9 @@ import com.ardat.comsubsaverapp.SubSaverApp
 import com.ardat.comsubsaverapp.feature.dashboard.DashboardScreen
 import com.ardat.comsubsaverapp.feature.dashboard.DashboardViewModel
 import com.ardat.comsubsaverapp.feature.dashboard.DashboardViewModelFactory
+import com.ardat.comsubsaverapp.feature.subscription.AddEditSubscriptionScreen
+import com.ardat.comsubsaverapp.feature.subscription.AddEditSubscriptionViewModel
+import com.ardat.comsubsaverapp.feature.subscription.AddEditSubscriptionViewModelFactory
 import androidx.navigation.navArgument
 
 @Composable
@@ -44,8 +47,17 @@ fun SubSaverNavGraph(
         }
 
         composable(Screen.AddSubscription.route) {
-            // Placeholder — replaced in Phase 3
-            PlaceholderScreen("Add Subscription")
+            val app = LocalContext.current.applicationContext as SubSaverApp
+            val viewModel: AddEditSubscriptionViewModel = viewModel(
+                factory = AddEditSubscriptionViewModelFactory(
+                    repository = app.subscriptionRepository,
+                    subscriptionId = null
+                )
+            )
+            AddEditSubscriptionScreen(
+                viewModel = viewModel,
+                onBack = { navController.popBackStack() }
+            )
         }
 
         composable(
@@ -54,23 +66,34 @@ fun SubSaverNavGraph(
                 navArgument("subscriptionId") { type = NavType.LongType }
             )
         ) {
-            // Placeholder — replaced in Phase 3
-            PlaceholderScreen("Edit Subscription")
+            val app = LocalContext.current.applicationContext as SubSaverApp
+            val subscriptionId = it.arguments?.getLong("subscriptionId")
+            val viewModel: AddEditSubscriptionViewModel = viewModel(
+                key = "edit-$subscriptionId",
+                factory = AddEditSubscriptionViewModelFactory(
+                    repository = app.subscriptionRepository,
+                    subscriptionId = subscriptionId
+                )
+            )
+            AddEditSubscriptionScreen(
+                viewModel = viewModel,
+                onBack = { navController.popBackStack() }
+            )
         }
 
         composable(Screen.Settings.route) {
             // Placeholder — replaced in Phase 7
-            PlaceholderScreen("Settings")
+            SettingsPlaceholderScreen()
         }
     }
 }
 
 @Composable
-private fun PlaceholderScreen(name: String) {
+private fun SettingsPlaceholderScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = name)
+        Text(text = "Settings")
     }
 }
