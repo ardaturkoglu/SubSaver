@@ -1,16 +1,16 @@
+# Android Studio / IntelliJ
 *.iml
-.gradle
+/.idea/
+
+# Gradle
+.gradle/
+**/build/
+
+# Local machine config
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-/.idea/firebender/
+
+# Android build artifacts
+/captures/
+.externalNativeBuild/
+.cxx/
