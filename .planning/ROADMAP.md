@@ -24,8 +24,8 @@
 
 ---
 
-### Phase 2: Dashboard Screen — List + Summary + Empty State
-**Goal**: Build the main dashboard with subscription list, monthly spend card, and empty state.
+### Phase 2: Dashboard Screen — List + Summary + Empty State + Motion
+**Goal**: Build the main dashboard with subscription list, monthly spend card, empty state, and engaging but lightweight animations.
 **Estimated effort**: 2-3 hours
 
 | Task | Requirement IDs | Deliverable |
@@ -37,13 +37,15 @@
 | `EmptyStateView` composable | FR-05 | `ui/components/EmptyStateView.kt` |
 | `CategoryChip` composable for filtering | FR-04 | `ui/components/CategoryChip.kt` |
 | Swipe-to-delete with confirmation | FR-12 | Integrated in DashboardScreen |
+| Add motion system for dashboard (staggered enter, animated list placement, chip transitions) | FR-07, NFR-11 | `feature/dashboard/` + `ui/components/` |
+| Animate total spend value changes | FR-08 | `SpendSummaryCard.kt` |
 
-**Exit criteria**: Dashboard shows subscriptions from Room, displays correct monthly total, empty state renders when no data.
+**Exit criteria**: Dashboard shows subscriptions from Room, displays correct monthly total, empty state renders when no data, and motion feels smooth/non-distracting.
 
 ---
 
-### Phase 3: Add/Edit Subscription Screen
-**Goal**: Complete subscription CRUD with validation.
+### Phase 3: Add/Edit Subscription Screen + Animated Form UX
+**Goal**: Complete subscription CRUD with validation and responsive motion feedback.
 **Estimated effort**: 1.5-2 hours
 
 | Task | Requirement IDs | Deliverable |
@@ -54,8 +56,24 @@
 | Billing cycle selector (segmented button) | FR-13 | Integrated in form |
 | Category selector (chip group) | FR-14 | Integrated in form |
 | Input validation with inline errors | FR-15 | Integrated in form |
+| Add form motion (field entrance, error state animation, save/loading transition) | FR-17, NFR-11 | `feature/subscription/AddEditSubscriptionScreen.kt` |
 
-**Exit criteria**: User can add, edit subscriptions. Validation prevents bad data. Saved data appears on dashboard.
+**Exit criteria**: User can add, edit subscriptions. Validation prevents bad data. Saved data appears on dashboard. Form interactions feel fast and polished.
+
+---
+
+### Phase 3.1: Home Screen Widget (Jetpack Glance)
+**Goal**: Add a lightweight SubSaver widget for quick glance value on the home screen.
+**Estimated effort**: 1-1.5 hours
+
+| Task | Requirement IDs | Deliverable |
+|---|---|---|
+| Add Jetpack Glance dependencies and receiver/provider setup | FR-60 | `app/build.gradle.kts`, manifest, widget package |
+| Create compact widget UI (monthly spend + subscription count) | FR-60 | `widget/SubSaverWidget.kt` |
+| Trigger widget refresh after add/edit/delete flows | FR-61 | ViewModels/repository integration |
+| Deep-link widget tap to dashboard | FR-62 | PendingIntent + navigation handoff |
+
+**Exit criteria**: Widget can be added from launcher, renders current totals, updates after data changes, and opens dashboard on tap.
 
 ---
 
@@ -151,9 +169,10 @@
 | 1 | Foundation + Supabase Baseline | 2-3h | FR-01,10,11,12,13,14,50,51,53 / NFR-01,04,05,09,10 |
 | 2 | Dashboard | 2-3h | FR-01,02,03,04,05,12 |
 | 3 | Add/Edit | 1.5-2h | FR-10,11,13,14,15,16 |
+| 3.1 | Widget (Jetpack Glance) | 1-1.5h | FR-60,61,62 |
 | 4 | Notifications | 1.5-2h | FR-20,21,22,23 |
 | 5 | AdMob | 1-1.5h | FR-30,31,32 |
 | 6 | Firebase | 0.75-1h | NFR-02,07 |
 | 7 | Settings + Polish | 1-1.5h | FR-40,41,42,52,54 / NFR-01,05,06,08,09 |
 | 8 | ASO + Publish | 2-3h | ASO-01 through ASO-09 |
-| **Total** | | **~13-17h** | **All requirements** |
+| **Total** | | **~14-19h** | **All requirements** |

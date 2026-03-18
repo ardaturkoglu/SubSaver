@@ -11,6 +11,8 @@
 | FR-04 | Filter/group subscriptions by category | P1 | User can tap category chips to filter the list |
 | FR-05 | Empty state when no subscriptions exist | P0 | Friendly illustration + CTA to add first subscription |
 | FR-06 | Pull-to-refresh subscription list | P2 | Swipe down refreshes data from Room |
+| FR-07 | Animated dashboard transitions and list interactions | P1 | Summary card/chips/list items animate in smoothly; delete uses animated removal |
+| FR-08 | Animated spend value updates | P2 | Monthly/yearly totals animate value changes when data updates |
 
 ### Subscription Management
 | ID | Requirement | Priority | Acceptance Criteria |
@@ -22,6 +24,7 @@
 | FR-14 | Select category from predefined list | P1 | Chips or dropdown: Streaming, Music, Cloud, Gaming, Fitness, News, Utilities, Other |
 | FR-15 | Input validation on amount and name | P0 | Empty name or zero/negative amount shows inline error |
 | FR-16 | Currency display (USD default) | P1 | Amounts formatted as $X.XX |
+| FR-17 | Animated add/edit form feedback | P1 | Field error/help states, save loading state, and content entrance transitions are animated |
 
 ### Notifications
 | ID | Requirement | Priority | Acceptance Criteria |
@@ -44,6 +47,13 @@
 | FR-40 | App version display | P2 | Shows versionName from BuildConfig |
 | FR-41 | Rate app link | P2 | Opens Play Store listing |
 | FR-42 | Notification toggle (enable/disable all) | P1 | Master toggle cancels or re-schedules all alarms |
+
+### Home Screen Widget (Jetpack Glance)
+| ID | Requirement | Priority | Acceptance Criteria |
+|---|---|---|---|
+| FR-60 | Add a compact home screen widget showing monthly spend | P1 | Widget shows current monthly total and subscription count |
+| FR-61 | Support widget refresh on subscription changes | P1 | Add/edit/delete updates widget state without manual refresh |
+| FR-62 | Widget tap deep-links into dashboard | P1 | Tapping widget opens app dashboard screen |
 
 ### Supabase (Backend Ops + Sync Readiness)
 | ID | Requirement | Priority | Acceptance Criteria |
@@ -68,6 +78,7 @@
 | NFR-08 | Accessibility (content descriptions) | P1 | All interactive elements have contentDescription |
 | NFR-09 | Dark mode support | P1 | Follows system theme via Material 3 |
 | NFR-10 | Supabase schema changes use tracked migrations | P1 | All DDL for Supabase is applied through migration files/commands, not ad hoc |
+| NFR-11 | Motion performance remains smooth | P1 | UI animations target smooth rendering on mid-range devices (no visible jank) |
 
 ## Play Store / ASO Requirements
 

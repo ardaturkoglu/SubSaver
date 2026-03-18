@@ -373,3 +373,21 @@ Same layout as light mode but fully dark-themed.
 | Onboarding flow? | **None** | Straight to dashboard; empty state is the onboarding |
 | Date library? | **java.time (LocalDate)** | minSdk 31, no need for ThreeTenABP |
 | Multiple currencies? | **Post-MVP** | Would require exchange rates, unnecessary complexity |
+
+---
+
+## Phase 2/3 Motion Contract (UI Planning Add-on)
+
+- Dashboard motion uses `AnimatedVisibility`, `animateItemPlacement`, and subtle staggered item entrance (120-220ms per element).
+- Spend totals use `AnimatedContent` or number tweening so monthly/yearly value changes are noticeable but not flashy.
+- Category chip filter changes crossfade/size animate the list result state.
+- Add/Edit form fields enter with short vertical fade transitions; validation messages animate in/out instead of abrupt jumps.
+- Save action uses loading-state animation and disabled button state to prevent double taps.
+- Motion guardrails: no long parallax, no heavy blur, avoid jank-prone chained animations; prioritize responsiveness.
+
+## Widget Sub-Phase Decision
+
+- Add **Phase 3.1** with Jetpack Glance widget:
+  - compact monthly total + subscription count
+  - deep-link tap to dashboard
+  - refresh after add/edit/delete changes
