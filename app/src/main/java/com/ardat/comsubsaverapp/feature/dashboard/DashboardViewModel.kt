@@ -1,11 +1,13 @@
 package com.ardat.comsubsaverapp.feature.dashboard
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.ardat.comsubsaverapp.data.model.Category
 import com.ardat.comsubsaverapp.data.model.Subscription
 import com.ardat.comsubsaverapp.data.repository.SubscriptionRepository
+import com.ardat.comsubsaverapp.widget.SubSaverWidgetUpdater
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +24,8 @@ data class DashboardUiState(
 )
 
 class DashboardViewModel(
-    private val repository: SubscriptionRepository
+    private val repository: SubscriptionRepository,
+    private val appContext: Context
 ) : ViewModel() {
 
     private val selectedCategory = MutableStateFlow<Category?>(null)
@@ -55,15 +58,17 @@ class DashboardViewModel(
     fun deleteSubscription(id: Long) {
         viewModelScope.launch {
             repository.deleteById(id)
+            SubSaverWidgetUpdater.refresh(appContext)
         }
     }
 }
 
 class DashboardViewModelFactory(
-    private val repository: SubscriptionRepository
+    private val repository: SubscriptionRepository,
+    private val appContext: Context
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return DashboardViewModel(repository) as T
+        return DashboardViewModel(repository, appContext) as T
     }
 }

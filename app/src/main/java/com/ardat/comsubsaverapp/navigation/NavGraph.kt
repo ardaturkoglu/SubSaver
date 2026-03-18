@@ -34,7 +34,10 @@ fun SubSaverNavGraph(
         composable(Screen.Dashboard.route) {
             val app = LocalContext.current.applicationContext as SubSaverApp
             val dashboardViewModel: DashboardViewModel = viewModel(
-                factory = DashboardViewModelFactory(app.subscriptionRepository)
+                factory = DashboardViewModelFactory(
+                    repository = app.subscriptionRepository,
+                    appContext = app.applicationContext
+                )
             )
             DashboardScreen(
                 viewModel = dashboardViewModel,
@@ -51,7 +54,8 @@ fun SubSaverNavGraph(
             val viewModel: AddEditSubscriptionViewModel = viewModel(
                 factory = AddEditSubscriptionViewModelFactory(
                     repository = app.subscriptionRepository,
-                    subscriptionId = null
+                    subscriptionId = null,
+                    appContext = app.applicationContext
                 )
             )
             AddEditSubscriptionScreen(
@@ -72,7 +76,8 @@ fun SubSaverNavGraph(
                 key = "edit-$subscriptionId",
                 factory = AddEditSubscriptionViewModelFactory(
                     repository = app.subscriptionRepository,
-                    subscriptionId = subscriptionId
+                    subscriptionId = subscriptionId,
+                    appContext = app.applicationContext
                 )
             )
             AddEditSubscriptionScreen(

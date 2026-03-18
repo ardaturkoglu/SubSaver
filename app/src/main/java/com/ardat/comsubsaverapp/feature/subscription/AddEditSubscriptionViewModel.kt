@@ -1,5 +1,6 @@
 package com.ardat.comsubsaverapp.feature.subscription
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.ardat.comsubsaverapp.data.model.BillingCycle
 import com.ardat.comsubsaverapp.data.model.Category
 import com.ardat.comsubsaverapp.data.model.Subscription
 import com.ardat.comsubsaverapp.data.repository.SubscriptionRepository
+import com.ardat.comsubsaverapp.widget.SubSaverWidgetUpdater
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -35,7 +37,8 @@ sealed interface AddEditSubscriptionEvent {
 
 class AddEditSubscriptionViewModel(
     private val repository: SubscriptionRepository,
-    private val subscriptionId: Long?
+    private val subscriptionId: Long?,
+    private val appContext: Context
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddEditSubscriptionUiState())
@@ -117,6 +120,7 @@ class AddEditSubscriptionViewModel(
             } else {
                 repository.insert(payload)
             }
+            SubSaverWidgetUpdater.refresh(appContext)
             _uiState.value = _uiState.value.copy(isSaving = false)
             _events.emit(AddEditSubscriptionEvent.Saved)
         }
@@ -125,10 +129,11 @@ class AddEditSubscriptionViewModel(
 
 class AddEditSubscriptionViewModelFactory(
     private val repository: SubscriptionRepository,
-    private val subscriptionId: Long?
+    private val subscriptionId: Long?,
+    private val appContext: Context
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AddEditSubscriptionViewModel(repository, subscriptionId) as T
+        return AddEditSubscriptionViewModel(repository, subscriptionId, appContext) as T
     }
 }
